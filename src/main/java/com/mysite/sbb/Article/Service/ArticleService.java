@@ -23,11 +23,19 @@ public class ArticleService {
 
     public Article getItem(Integer id){
         Optional<Article> article = this.articleRepository.findById(id);
+
         if(article.isPresent()){
             return article.get();
         }
         else{
             throw new DataNotFoundException("article not found");
         }
+    }
+
+    public String setItemView(Integer id){
+        Article article = articleRepository.findById(id).get();
+        article.setView(article.getView()+1);
+        articleRepository.save(article);
+        return "조회수가 증가되었습니다.";
     }
 }

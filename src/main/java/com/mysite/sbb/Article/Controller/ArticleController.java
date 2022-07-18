@@ -33,6 +33,7 @@ public class ArticleController {
     @RequestMapping("detail/{id}")
     public String getArticle(Model model, @PathVariable("id") Integer id){
         Article article = articleService.getItem(id);
+        articleService.setItemView(id);
         model.addAttribute("article",article);
         return "article_detail";
     }

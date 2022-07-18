@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,10 +10,25 @@
 <body>
 <h2 th:text="${article.subject}"></h2>
 <div th:text="${article.content}"></div>
+<hr />
+<div>조회수 </div>
+<div th:text="${article.view}">조회수</div>
+<hr />
+
+<h5 th:text="|${#lists.size(article.replyList)}개의 답변이 있습니다.|"></h5>
+
 <div th:each="reply : ${article.replyList}">
     <hr />
     <div th:text="${reply.content}"></div>
     <div th:text="${reply.createDate}"></div>
+    <button type="button">좋아요</button>
 </div>
+
+<form th:action="@{|/reply/create/${article.id}|}" method="post">
+        <textarea name="content" id="content" rows="15"></textarea>
+    <input type="submit" value="답변등록">
+</form>
+
 </body>
+<script class="goodAndHate"></script>
 </html>

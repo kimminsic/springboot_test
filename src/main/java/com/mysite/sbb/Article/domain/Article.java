@@ -29,4 +29,6 @@ public class Article {
 
     @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
     private List<Reply> replyList;
+
+    private Integer view;
 }

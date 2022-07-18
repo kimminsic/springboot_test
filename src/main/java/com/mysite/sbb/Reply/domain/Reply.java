@@ -24,6 +24,8 @@ public class Reply {
 
     @ManyToOne
     private Article article;
+
+    private boolean good;
 }
 
 
