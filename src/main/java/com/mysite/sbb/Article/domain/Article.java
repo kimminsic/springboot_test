@@ -1,28 +1,32 @@
 package com.mysite.sbb.Article.domain;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.mysite.sbb.Reply.domain.Reply;
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Entity
+@Entity(name = "article")
 @Getter
 @Setter
+@JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class)
 public class Article {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer Id;
+    private Integer id;
 
+    @Column(length = 200)
     private String subject;
 
-    @Column(columnDefinition = "TYPE")
+    @Column(columnDefinition = "TEXT")
     private String content;
 
-    private LocalDateTime create_date;
+    private LocalDateTime createDate;
 
-    private Integer view;
-
-    @ManyToOne()
-    private String ReplyList;
+    @OneToMany(mappedBy = "article", cascade = CascadeType.REMOVE)
+    private List<Reply> replyList;
 }
