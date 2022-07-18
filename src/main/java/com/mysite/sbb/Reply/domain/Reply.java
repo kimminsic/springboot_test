@@ -1,20 +1,24 @@
-package com.mysite.sbb.test.domain;
+package com.mysite.sbb.Reply.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 
+@Entity
 @Getter
 @Setter
-@Entity
-public class Test {
+public class Reply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Size(min = 1, max = 2)
-    @Column(length = 4)
+    @Column(columnDefinition = "TYPE")
     private String content;
+
+    private LocalDateTime create_date;
+
+    private boolean good;
+
 }
